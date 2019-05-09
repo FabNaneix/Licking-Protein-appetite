@@ -21,20 +21,21 @@ def Extract (metafile):
     
     tablerows = []
     for i in Rows:
-        tablerows.append(i.split('\t'))
+        items = i.split('\t')
+        tablerows.append(items)
     
-    medfile, Rat, Session, Box, Diet, Date, Left, Right \
+    Medfile, Rat, Session, Box, Diet, Date, Left, Right \
     = [],[],[],[],[],[],[],[]
     
-    for i, list in enumerate(tablerows):
-         Medfile = medfile + [list[1]]
-         Rat = Rat + [list[2]]
-         Session = Session + [list[3]]
-         Box = Box + [list[4]]
-         Diet = Diet + [list[5]]
-         Date = Date + [list[6]]
-         Left = Left + [list[7]] ## content of the left bottle
-         Right = Right + [list[8]]  ## content of the right bottle
+    for i, lst in enumerate(tablerows):
+         Medfile = Medfile + [lst[1]]
+         Rat = Rat + [lst[2]]
+         Session = Session + [lst[3]]
+         Box = Box + [lst[4]]
+         Diet = Diet + [lst[5]]
+         Date = Date + [lst[6]]
+         Left = Left + [lst[7]] ## content of the left bottle
+         Right = Right + [lst[8]]  ## content of the right bottle
                        
     return ({'Medfile':Medfile, 'Rat':Rat, 'Session':Session, 'Box':Box, \
              'Diet':Diet, 'Date':Date, 'Left':Left, 'Right':Right})
