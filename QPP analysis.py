@@ -41,16 +41,61 @@ def Extract (metafile):
              'Diet':Diet, 'Date':Date, 'Left':Left, 'Right':Right})
     #create a dict for each column
 
+#05/11/2018 to 09/11/2018 
+#12/11/2018 to 16/11/2018
+#19/11/2018 to 21/11/2018
+    
+    
+    
+def ListsMaker(date, LLicks, RLicks):
+    PrefT_C_LicksNR = []
+    PrefT_M_LicksNR = []
+    PrefT_C_LicksPR = []
+    PrefT_M_LicksPR = []
+    for rat in np.unique(Data['Rat']): #create a list of the rats in numerical order
+        for index, session in enumerate(Data['Date']): #index the position in the Date list
+            if Data['Date'][index] == date: #select the quinine concentration 0 (no quinine)
+                    if Data['Rat'][index] == rat:
+                        if 'NR' in Data['Diet'][index]:
+                            if 'Cas' in Data['Left'][index]:
+                                PrefT_C_LicksNR.append(LLicks[index])
+                            if 'Cas' in Data['Right'][index]:
+                                PrefT_C_LicksNR.append(RLicks[index])
+                            if 'Malto' in Data['Left'][index]:
+                                PrefT_M_LicksNR.append(LLicks[index])
+                            if 'Malto' in Data['Right'][index]:
+                                PrefT_M_LicksNR.append(RLicks[index])
+                        if 'PR' in Data['Diet'][index]:
+                           if 'Cas' in Data['Left'][index]:
+                                PrefT_C_LicksPR.append(LLicks[index])
+                           if 'Cas' in Data['Right'][index]:
+                                PrefT_C_LicksPR.append(RLicks[index])
+                           if 'Malto' in Data['Left'][index]:
+                                PrefT_M_LicksPR.append(LLicks[index])
+                           if 'Malto' in Data['Right'][index]:
+                                PrefT_M_LicksPR.append(RLicks[index])
+                                
+    return([PrefT_C_LicksNR, PrefT_M_LicksNR, PrefT_C_LicksPR, PrefT_M_LicksPR])
+
+# If length of list is zero then go away     
+                                 
+                                
 Data = Extract(metafile)
 
 ## Extraction licks ('b' = licks left; 'e'= licks right) from medfile
 Licksallrats = []
-Licks = []
 for Medfile in Data['Medfile']:
-    Licks = []
-    Licks.append(GF.medfilereader(medfolder+Medfile,varsToExtract = ['b','e'], remove_var_header = True))
-    Licksallrats.append(Licks)
+    Licksallrats.append(GF.medfilereader(medfolder+Medfile,varsToExtract = ['b','e'], remove_var_header = True))
 
 TotalLicks = []
-for l in Licks:
+for l in Licksallrats:
     TotalLicks.append(len(l[0]) + len(l[1]))
+
+LLicks = []
+RLicks = []
+
+for session in Licksallrats:
+    LLicks.append(session[0])
+    RLicks.append(session[1])
+
+quininezero_t1 = ListsMaker('05/11/2018', LLicks, RLicks)
