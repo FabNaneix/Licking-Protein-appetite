@@ -52,29 +52,30 @@ def ListsMaker(date, LLicks, RLicks):
     PrefT_M_LicksNR = []
     PrefT_C_LicksPR = []
     PrefT_M_LicksPR = []
-    for rat in np.unique(Data['Rat']): #create a list of the rats in numerical order
-        for index, session in enumerate(Data['Date']): #index the position in the Date list
-            if Data['Date'][index] == date: #select the quinine concentration 0 (no quinine)
-                    if Data['Rat'][index] == rat:
-                        if 'NR' in Data['Diet'][index]:
-                            if 'Cas' in Data['Left'][index]:
-                                PrefT_C_LicksNR.append(LLicks[index])
-                            if 'Cas' in Data['Right'][index]:
-                                PrefT_C_LicksNR.append(RLicks[index])
-                            if 'Malto' in Data['Left'][index]:
-                                PrefT_M_LicksNR.append(LLicks[index])
-                            if 'Malto' in Data['Right'][index]:
-                                PrefT_M_LicksNR.append(RLicks[index])
-                        if 'PR' in Data['Diet'][index]:
-                           if 'Cas' in Data['Left'][index]:
-                                PrefT_C_LicksPR.append(LLicks[index])
-                           if 'Cas' in Data['Right'][index]:
-                                PrefT_C_LicksPR.append(RLicks[index])
-                           if 'Malto' in Data['Left'][index]:
-                                PrefT_M_LicksPR.append(LLicks[index])
-                           if 'Malto' in Data['Right'][index]:
-                                PrefT_M_LicksPR.append(RLicks[index])
-                                
+    for index, session in enumerate(Data['Date']): #index the position in the Date list
+        if Data['Date'][index] == date: #select the quinine concentration 0 (no quinine)
+                if 'NR' in Data['Diet'][index]:
+                    if 'Cas' in Data['Left'][index]:
+                        PrefT_C_LicksNR.append(LLicks[index])
+                    if 'Cas' in Data['Right'][index]:
+                        PrefT_C_LicksNR.append(RLicks[index])
+                    if 'Malto' in Data['Left'][index]:
+                        PrefT_M_LicksNR.append(LLicks[index])
+                    if 'Malto' in Data['Right'][index]:
+                        print('b')
+                        PrefT_M_LicksNR.append(RLicks[index])
+                if 'PR' in Data['Diet'][index]:
+                   if 'Cas' in Data['Left'][index]:
+                        PrefT_C_LicksPR.append(LLicks[index])
+                   if 'Cas' in Data['Right'][index]:
+                        PrefT_C_LicksPR.append(RLicks[index])
+                   if 'Malto' in Data['Left'][index]:
+                        print('c')
+                        PrefT_M_LicksPR.append(LLicks[index])
+                   if 'Malto' in Data['Right'][index]:
+                        print('d')
+                        PrefT_M_LicksPR.append(RLicks[index])
+                        
     return([PrefT_C_LicksNR, PrefT_M_LicksNR, PrefT_C_LicksPR, PrefT_M_LicksPR])
 
 # If length of list is zero then go away     
