@@ -210,15 +210,74 @@ def Micro_anal(Quin_cond):
             Lick_patterns_dicts.append(x)
     return Lick_patterns_dicts
     
+                      
+#Licking microstructure for each quinine concentration for FORCED TRIALS (1 bottle available)
+Micro_Quin0_t1_forced = Micro_anal(Quin0_t1_forced)
+Micro_Quin0_t2_forced = Micro_anal(Quin0_t2_forced)
+Micro_Quin0_03_t1_forced = Micro_anal(Quin0_03_t1_forced)
+Micro_Quin0_03_t2_forced = Micro_anal(Quin0_03_t2_forced)
+Micro_Quin0_06_t1_forced = Micro_anal(Quin0_06_t1_forced)
+Micro_Quin0_06_t2_forced = Micro_anal(Quin0_06_t2_forced)
+Micro_Quin0_1_t1_forced = Micro_anal(Quin0_1_t1_forced)
+Micro_Quin0_1_t2_forced = Micro_anal(Quin0_1_t2_forced)
+Micro_Quin0_5_t1_forced = Micro_anal(Quin0_5_t1_forced)
+Micro_Quin0_5_t2_forced = Micro_anal(Quin0_5_t2_forced)
+Micro_Quin1_0_t1_forced = Micro_anal(Quin1_0_t1_forced)
+Micro_Quin1_0_t2_forced = Micro_anal(Quin1_0_t2_forced)
 
-Micro_Quin0_t1 = Micro_anal(Quin0_t1)
+
+#Licking microstructure for each quinine concentration for FREE CHOICE TRIALS (2 bottles available)
+Micro_Quin0_t1_free = Micro_anal(Quin0_t1_free)
+Micro_Quin0_t2_free = Micro_anal(Quin0_t2_free)
+Micro_Quin0_03_t1_free = Micro_anal(Quin0_03_t1_free)
+Micro_Quin0_03_t2_free = Micro_anal(Quin0_03_t2_free)
+Micro_Quin0_06_t1_free = Micro_anal(Quin0_06_t1_free)
+Micro_Quin0_06_t2_free = Micro_anal(Quin0_06_t2_free)
+Micro_Quin0_1_t1_free = Micro_anal(Quin0_1_t1_free)
+Micro_Quin0_1_t2_free = Micro_anal(Quin0_1_t2_free)
+Micro_Quin0_5_t1_free = Micro_anal(Quin0_5_t1_free)
+Micro_Quin0_5_t2_free = Micro_anal(Quin0_5_t2_free)
+Micro_Quin1_0_t1_free = Micro_anal(Quin1_0_t1_free)
+Micro_Quin1_0_t2_free = Micro_anal(Quin1_0_t2_free)
 
 
 
 
 
+#Transform lists of licks in Quinine conditions in array to calculate the pref with licks
+NR_C_free = []
+NR_M_free = []
+for rat in Quin0_t1_free[0]:
+    a = len(rat)
+    NR_C_free.append(a)
+for rat in Quin0_t1_free[1]:
+    b = len(rat)
+    NR_M_free.append(b)
 
 
+Pref_NR = []
+for index, len_licks in enumerate(NR_C_free):  
+    cas = len_licks 
+    malto = NR_M_free[index]
+    all_free_licks = cas + malto
+    Pref_NR.append(cas /all_free_licks * 100)
+
+    
+PR_C_free = []
+PR_M_free = []
+for rat in Quin0_t1_free[2]:
+    a = len(rat)
+    PR_C_free.append(a)
+for rat in Quin0_t1_free[3]:
+    b = len(rat)
+    PR_M_free.append(b)
+
+Pref_PR = []
+for index, len_licks in enumerate(PR_C_free):  
+    cas = len_licks 
+    malto = PR_M_free[index]
+    all_free_licks = cas + malto
+    Pref_PR.append(cas /all_free_licks * 100)
 
 
 
