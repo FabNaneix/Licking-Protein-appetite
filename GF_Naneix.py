@@ -149,10 +149,8 @@ def lickCalc(licks, offset = [], burstThreshold = 0.25, clustThreshold = 0.5,
         lickData['bNum'] = len(lickData['bStart']) #bursts number
         if lickData['bNum'] > 0:
             lickData['bMean'] = np.nanmean(lickData['bLicks']) #mean licks/bursts
-            lickData['bMean-first3'] = np.nanmean(lickData['bLicks'][:3]) #mean licks/bursts on the 1st 3 bursts (not sure it's useful)
         else:
             lickData['bMean'] = 0
-            lickData['bMean-first3'] = 0
         
         lickData['bILIs'] = [x for x in lickData['ilis'] if x > burstThreshold] #ILIs within bursts
     
