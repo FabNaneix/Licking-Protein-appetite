@@ -4,8 +4,9 @@ Data extraction and analyses for Quinine Protein Preference QPP
 
 @author: Fabien Naneix
 """
-import numpy as np
+#import numpy as np
 import GF_Naneix as GF
+import pandas as pd
 
 
 #Definition of functions used lated for the analyses
@@ -106,10 +107,51 @@ Sort_micro function:
 - run the function Micro_anal (see above) on each list and return dictionnaries\
  of lick microstructure
 - then sort these dicts in NR casein, NR maltodextrin, PR casein and\
- PR maltodextrin (see structure of ListMaker)
-- return a dict containing the 4 sorted analyses   
+ PR maltodextrin. 
+- return a dict containing the 4 sorted analyses. You have a dict of 4 entries (diet_bottle)\
+and each entry contains 12 lists (1 per quin day) containing 4 dicts (one per animal)\
+with all licking parameters
 """
+def Sort_micro(Quin_cond):
+    Micro_lst = []
+    for licks in Quin_cond:
+        Micro_lst.append(Micro_anal(licks))
+        
+    Micro_NR_c = []
+    Micro_NR_m = []
+    Micro_PR_c =[]    
+    Micro_PR_m = []
+    
+    for quin_test in Micro_lst: #for each day of quinine test
+        for condition in quin_test[0:4]:
+            Micro_NR_c.append(condition)        
+        for condition in quin_test[4:8]:
+            Micro_NR_m.append(condition)
+        for condition in quin_test[8:12]:
+            Micro_PR_c.append(condition)
+        for condition in quin_test[12:]:
+            Micro_PR_m.append(condition)
 
+    Micro_NR_casein = []
+    for rat in range(0, len(Micro_NR_c), 4):
+        split = Micro_NR_c[rat:rat+4]
+        Micro_NR_casein.append(split)
+    Micro_NR_malto = []
+    for rat in range(0, len(Micro_NR_m), 4):
+        split = Micro_NR_m[rat:rat+4]
+        Micro_NR_malto.append(split)
+    Micro_PR_casein = []
+    for rat in range(0, len(Micro_PR_c), 4):
+        split = Micro_PR_c[rat:rat+4]
+        Micro_PR_casein.append(split)    
+    Micro_PR_malto = []
+    for rat in range(0, len(Micro_PR_m), 4):
+        split = Micro_PR_m[rat:rat+4]
+        Micro_PR_malto.append(split)
+    
+
+    return {'Micro_NR_casein': Micro_NR_casein, 'Micro_NR_malto': Micro_NR_malto,\
+        'Micro_PR_casein': Micro_PR_casein, 'Micro_PR_malto': Micro_PR_malto}
 """
 PrefCalc function
 Calculate the % casein preference based on licks during free choice trials
@@ -278,7 +320,8 @@ Quin_free = [Quin0_t1_free, Quin0_t2_free, Quin0_03_t1_free, Quin0_03_t2_free,\
              Quin0_5_t1_free, Quin0_5_t2_free, Quin1_0_t1_free, Quin1_0_t2_free]
 
 
-##Calculate casein preference for each rat for a each quinine concentration test
+##Calculate casein preference for each rat for a each quinine concentration test\
+#based on licks during free choice trials
 #Split the results in separate lists for NR and PR
 Cas_Pref = []
 for Quin in Quin_free:
@@ -290,36 +333,45 @@ for pref in Cas_Pref:
     Cas_Pref_NR.append(pref[0]) #isolate casein preference for NR group
     Cas_Pref_PR.append(pref[1]) #isolate casein preference for PR group
 
-#add quin concentration as a key for both NR and PR groups casein preferences    
-Cas_Pref_NR_bottle = {'Quin 0': Cas_Pref_NR[0:2], 'Quin 0.03':Cas_Pref_NR[2:4],\
+#Add quin concentration as a key for both NR and PR groups casein preferences    
+Cas_Pref_NR_quinine = {'Quin 0': Cas_Pref_NR[0:2], 'Quin 0.03':Cas_Pref_NR[2:4],\
                       'Quin 0.06': Cas_Pref_NR[4:6], 'Quin 0.1': Cas_Pref_NR[6:8],\
                       'Quin 0.5': Cas_Pref_NR[8:10], 'Quin 1.0': Cas_Pref_NR[10:]}
     
-Cas_Pref_PR_bottle = {'Quin 0': Cas_Pref_PR[0:2], 'Quin 0.03':Cas_Pref_PR[2:4],
+Cas_Pref_PR_quinine = {'Quin 0': Cas_Pref_PR[0:2], 'Quin 0.03':Cas_Pref_PR[2:4],
                       'Quin 0.06': Cas_Pref_PR[4:6], 'Quin 0.1': Cas_Pref_PR[6:8],
                       'Quin 0.5': Cas_Pref_PR[8:10], 'Quin 1.0': Cas_Pref_PR[10:]}
      
-###Licking microstructure during forced and free choice trials
-#Micro_licks_forced = Sort_micro(Quin_forced)
-#Micro_licks_free = Sort_micro(Quin_free)
-#
-#
-#
+##Licking microstructure during forced and free choice trials
+Micro_licks_forced = Sort_micro(Quin_forced)
+Micro_licks_free = Sort_micro(Quin_free)
+
+#Sort and export final results
+
+
+
+
 ###try to calculate preference based on choice for each trial
 ##isolate timing of each free choice trial
 ##determine casein or maltodextrin licking during each trial as true or false
 ##true=1 false=0
 ##calculate pref as
 #
-#Free_trials = [] #list of timestamps of each free choice test across quinine days
+#Free_trials_timing = [] #list of timestamps of each free choice test across quinine days
 #for trials in Trials:
-#    Free_trials.append(trials[45:])
+#    Free_trials_timing.append(trials[45:])
+#Free_trials_end = []
+#for rat in Free_trials_timing:
+#    for trial_start in range(0, len(rat), 30):
+#        trial_end = rat[trial_start:trial_start+30]
+#        Free_trials_end.append(trial_end) 
+#
 #
 #LLicks_casein = []
 #LLicks_malto = []
 #RLicks_casein = []
 #RLicks_malto = []
-#
+##
 #for index, bottle in enumerate(Data['Left']):
 #    if 'Cas' in Data['Left'][index]:
 #        LLicks_casein.append(LLicks[index])
@@ -331,53 +383,5 @@ Cas_Pref_PR_bottle = {'Quin 0': Cas_Pref_PR[0:2], 'Quin 0.03':Cas_Pref_PR[2:4],
 #        RLicks_casein.append(RLicks[index])
 #    else:
 #        RLicks_malto.append(RLicks[index])
-#        
-
-
-
-
-def Sort_micro(Quin_cond):
-    Micro_lst = []
-    for licks in Quin_cond:
-        Micro_lst.append(Micro_anal(licks))
         
-    Micro_NR_c = []
-    Micro_NR_m= []
-    Micro_PR_c =[]    
-    Micro_PR_m = []
-    
-    for quin_test in Micro_lst: #for each day of quinine test
-        for condition in quin_test[0:4]:
-            Micro_NR_c.append(condition)        
-        for condition in quin_test[4:8]:
-            Micro_NR_m.append(condition)
-        for condition in quin_test[8:12]:
-            Micro_PR_c.append(condition)
-        for condition in quin_test[12:]:
-            Micro_PR_m.append(condition)
-
-    Micro_NR_casein = []
-    for rat in range(0, len(Micro_NR_c), 4):
-        split = Micro_NR_c[rat:rat+4]
-        Micro_NR_casein.append(split)
-    Micro_NR_malto = []
-    for rat in range(0, len(Micro_NR_m), 4):
-        split = Micro_NR_m[rat:rat+4]
-        Micro_NR_casein.append(split)
-    Micro_PR_casein = []
-    for rat in range(0, len(Micro_PR_c), 4):
-        split = Micro_PR_c[rat:rat+4]
-        Micro_PR_casein.append(split)    
-    Micro_PR_malto = []
-    for rat in range(0, len(Micro_PR_m), 4):
-        split = Micro_PR_m[rat:rat+4]
-        Micro_PR_malto.append(split)
-    
-
-    return {'Micro_NR_casein': Micro_NR_casein, 'Micro_NR_malto': Micro_NR_malto,\
-        'Micro_PR_casein': Micro_PR_casein, 'Micro_PR_malto': Micro_PR_malto}
-
-
-   
-
-
+Cas_Pref_spreadsheet = pd.DataFrame.from_dict(Cas_Pref_NR_quinine, orient='index').transpose()
