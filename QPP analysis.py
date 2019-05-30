@@ -346,9 +346,121 @@ Cas_Pref_PR_quinine = {'Quin 0': Cas_Pref_PR[0:2], 'Quin 0.03':Cas_Pref_PR[2:4],
 Micro_licks_forced = Sort_micro(Quin_forced)
 Micro_licks_free = Sort_micro(Quin_free)
 
+
+
+
+#(Remember this is 4 of these listsin 1 dict add outer loop)
+
+def allratlistmaker(Micro_licks_dict):
+    
+    count = 0 
+    bMean_all = []
+    bNum_all = []
+    clustMean_all = []
+    clustNum_all = []
+    freq_all = []
+    total_all = [] 
+    
+    for index, condition in enumerate(Micro_licks_dict):
+        for quinine_conc in condition:
+            #print(quinine_conc)
+            for rat_dict in quinine_conc:
+                #print(type(rat_dict))
+               # print(rat_dict)
+
+                count += 1 
+            
+#                bMean_all.append(rat['bMean'])
+#                bNum_all.append(rat['bNum'])
+#                clustMean_all.append(rat['clustMean'])
+#                clustNum_all.append(rat['clustNum'])
+#                freq_all.append(rat['freq'])
+#                total_all.append(rat['total'])
+                
+ #   return(bMean_all, bNum_all, clustMean_all, clustNum_all, freq_all, total_all)
+
+    return count
+
+bMean_all_forced, bNum_all_forced, clustMean_all_forced, \
+clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_licks_forced)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#def microstruct_extractor (quinine_dict, key):
+#    Micro_NR_casein = []
+#    Micro_NR_malto = []
+#    Micro_PR_casein = []
+#    Micro_PR_malto = []
+#
+#    for day in quinine_dict['Micro_NT_casein']:
+#        for rat in day:
+#            Micro_NR_casein.append(rat['key'])
+#            
+#    return {'Micro_NR_casein': Micro_NR_casein, 'Micro_NR_malto': Micro_NR_malto,\
+#        'Micro_PR_casein': Micro_PR_casein, 'Micro_PR_malto': Micro_PR_malto}
+#
+#                
+#Micro_NR_bMean = microstruct_extractor(Micro_licks_forced, Micro_licks_forced[0:][0:]['bMean'])   
+#    
+#    
+#    for day in quinine_dict['Micro_NR_casein']:
+#        for rat in day:
+#            for key in rat:
+#                data = value in rat
+#                Micro_NR_casein.append(data)
+#
+#    for day in quinine_dict['Micro_NR_malto']:
+#        for rat in day:
+#            data = rat[key]
+#            Micro_NR_malto.append(data)
+#            
+#    for day in quinine_dict['Micro_PR_casein']:
+#        for rat in day:
+#            data = rat[key]
+#            Micro_PR_casein.append(data)
+#            
+#    for day in quinine_dict['Micro_PR_malto']:
+#        for rat in day:
+#            data = rat[key]
+#            Micro_PR_malto.append(data)
+#
+#    return {'Micro_NR_casein': Micro_NR_casein, 'Micro_NR_malto': Micro_NR_malto,\
+#        'Micro_PR_casein': Micro_PR_casein, 'Micro_PR_malto': Micro_PR_malto}
+#
+#Micro_NR_bMean = microstruct_extractor(Micro_licks_forced, Micro_licks_forced['bMean'])
+
+
+
+
 #Sort and export final results
 
-
+#import csv
+#with open('Casein Preference.csv', 'w') as output:
+#    writer = csv.writer(output)
+#    for quinine in Cas_Pref_NR_quinine:
+#        for test in quinine:
+#            for pref_value in test:
+#                writer.writerows([quinine, pref_value])
 
 
 ###try to calculate preference based on choice for each trial
@@ -384,4 +496,3 @@ Micro_licks_free = Sort_micro(Quin_free)
 #    else:
 #        RLicks_malto.append(RLicks[index])
         
-Cas_Pref_spreadsheet = pd.DataFrame.from_dict(Cas_Pref_NR_quinine, orient='index').transpose()

@@ -153,7 +153,8 @@ def lickCalc(licks, offset = [], burstThreshold = 0.25, clustThreshold = 0.5,
             lickData['bMean'] = 0
         
         lickData['bILIs'] = [x for x in lickData['ilis'] if x > burstThreshold] #ILIs within bursts
-    
+               
+        
         ### Calculates start, end, number of licks and time for each CLUSTER (parameters are the same than for bursts)
         lickData['clustStart'] = [val for i, val in enumerate(lickData['licks']) if (val - lickData['licks'][i-1] > clustThreshold)]  
         lickData['clustInd'] = [i for i, val in enumerate(lickData['licks']) if (val - lickData['licks'][i-1] > clustThreshold)]
@@ -163,7 +164,11 @@ def lickCalc(licks, offset = [], burstThreshold = 0.25, clustThreshold = 0.5,
         lickData['clustLicks'] = np.diff(lickData['clustInd'] + [len(lickData['licks'])])    
         lickData['clustTime'] = np.subtract(lickData['clustEnd'], lickData['clustStart'])
         lickData['clustNum'] = len(lickData['clustStart'])
-    
+        if lickData['clustNum'] > 0:
+            lickData['clustMean'] = np.nanmean(lickData['clustLicks'])
+        else:
+            lickData['clustMean'] = 0
+            
         lickData['clustILIs'] = [x for x in lickData['ilis'] if x > clustThreshold]
         
         return lickData
