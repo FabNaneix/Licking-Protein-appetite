@@ -350,57 +350,30 @@ Micro_licks_forced = Sort_micro(Quin_forced)
 Micro_licks_free = Sort_micro(Quin_free)
 
 
-
-
-#(Remember this is 4 of these listsin 1 dict add outer loop)
-
-def allratlistmaker(Micro_licks_dict):
+''' KZP - Added 30/05/19
+    Code to pull out chosen lickCalc parameters and make 192 length lists
+    Currently not a function and currently only on forced choice data 
+    Note: Modified the GF_Naneix function to always create clustMean (was missing from the else section)
+    When you do not have clustMean, the else loop is triggered for day 11, rat 2 in NR_casein and breaks the for loops here 
     
-    count = 0 
-    bMean_all = []
-    bNum_all = []
-    clustMean_all = []
-    clustNum_all = []
-    freq_all = []
-    total_all = [] 
-    
-    for index, condition in enumerate(Micro_licks_dict):
-        for quinine_conc in condition:
-            #print(quinine_conc)
-            for rat_dict in quinine_conc:
-                #print(type(rat_dict))
-               # print(rat_dict)
+'''
 
-                count += 1 
-            
-#                bMean_all.append(rat['bMean'])
-#                bNum_all.append(rat['bNum'])
-#                clustMean_all.append(rat['clustMean'])
-#                clustNum_all.append(rat['clustNum'])
-#                freq_all.append(rat['freq'])
-#                total_all.append(rat['total'])
-                
- #   return(bMean_all, bNum_all, clustMean_all, clustNum_all, freq_all, total_all)
+bMean_all = []
+bNum_all = []
+clustMean_all = []
+clustNum_all = []
+freq_all = []
+total_all = []
 
-    return count
-#
-#bMean_all_forced, bNum_all_forced, clustMean_all_forced, \
-#clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_licks_forced)
-#
-#
-#
-
-
-
-
-
-
-
-
-
-
-
-
+for condition_name in Micro_licks_forced:
+    for quinine_conc in Micro_licks_forced[condition_name]:
+        for rat_dict in quinine_conc:
+            bMean_all.append(rat_dict['bMean'])
+            bNum_all.append(rat_dict['bNum'])
+            clustMean_all.append(rat_dict['clustMean'])
+            clustNum_all.append(rat_dict['clustNum'])
+            freq_all.append(rat_dict['freq'])
+            total_all.append(rat_dict['total'])
 
 
 
