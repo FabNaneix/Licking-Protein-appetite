@@ -181,7 +181,7 @@ def lickCalc(licks, offset = [], burstThreshold = 0.25, clustThreshold = 0.5,
         lickData['bLicks'] = 0   
         lickData['bTime'] = 0
         lickData['bNum'] = 0
-        lickData['bMean-first3'] = 0
+        lickData['bMean'] = 0
         
         lickData['bILIs'] = 0
         
@@ -189,7 +189,7 @@ def lickCalc(licks, offset = [], burstThreshold = 0.25, clustThreshold = 0.5,
         lickData['clustStart'] = 0  
         lickData['clustInd'] = 0
         lickData['clustEnd'] = 0
-        
+        lickData['clustMean'] = 0
         lickData['clustLicks'] = 0    
         lickData['clustTime'] = 0
         lickData['clustNum'] = 0
