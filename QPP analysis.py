@@ -6,14 +6,13 @@ Data extraction and analyses for Quinine Protein Preference QPP
 """
 #import numpy as np
 import GF_Naneix as GF
-import pandas as pd
 
 
 #Definition of functions used lated for the analyses
 """
-Extract function (from JEM_general_function)
+Extracts function (from JEM_general_function)
 Goes through the metafile (as .txt)
-Extract each column of interest and return a list for each
+Extracts each column of interest and return a list for each
 """
 ## Extraction of data and creation of lists for each column from the metafile
 def Extract (metafile):
@@ -47,11 +46,11 @@ def Extract (metafile):
    
 """
 ListMaker function
-Use the following arguments
+Uses the following arguments
 date: date of the session of interest
 LLicks: list of left licks with the same index than 'date'
 RLicks: list of Right licks with the same index than 'date'
-Return for each session ('date') 4 lists of n animals as following:
+Returns for each session ('date') 4 lists of n animals as following:
 NR_casein / NR_malto / PR_casein / NR_malto
 """    
 def ListsMaker(date, LLicks, RLicks):
@@ -85,10 +84,10 @@ def ListsMaker(date, LLicks, RLicks):
 
 """
 Micro_anal function:
-- Go throught a list of list (Quin_cond) corresponding of lick data for\
+- Goes throught a list of list (Quin_cond) corresponding of lick data for\
 1 specific quinine day and condition (total, forced or free)
-- Run lickCalc on each list to analyse licking microstructure
-- return a list of dictionaries of 23 parameters
+- Runs lickCalc on each list to analyse licking microstructure
+- returns a list of dictionaries of 23 parameters
 - each list is 1 rat/1 bottle in the following order:
 NR_casein (4) / NR_Malto (4) / PR_casein (4) / PR_Malto (see ListsMaker function)
    
@@ -103,7 +102,7 @@ def Micro_anal(Quin_cond):
 
 """    
 Sort_micro function:
-- use list of licks (here list of licks during forced or free trials)
+- uses list of licks (here list of licks during forced or free trials)
 - run the function Micro_anal (see above) on each list and return dictionnaries\
  of lick microstructure
 - then sort these dicts in NR casein, NR maltodextrin, PR casein and\
@@ -152,6 +151,36 @@ def Sort_micro(Quin_cond):
 
     return {'Micro_NR_casein': Micro_NR_casein, 'Micro_NR_malto': Micro_NR_malto,\
         'Micro_PR_casein': Micro_PR_casein, 'Micro_PR_malto': Micro_PR_malto}
+
+
+"""
+Sort_micro function:
+- uses dict created by Sort_micro
+- extracts 6 parameters of licking patterns and split htem in different lists
+- each list contain n=(animal*diet)session*bottle (here 192 in the following order\
+NR-casein, NR-malto, PR-casein, PR-malto)
+"""
+def allratlistmaker(licking_patterns):
+    bMean_all = []
+    bNum_all = []
+    clustMean_all = []
+    clustNum_all = []
+    freq_all = []
+    total_all = []    
+
+    for condition_name in Micro_licks_forced:
+        for quinine_conc in Micro_licks_forced[condition_name]:
+            for rat_dict in quinine_conc:
+                bMean_all.append(rat_dict['bMean'])
+                bNum_all.append(rat_dict['bNum'])
+                clustMean_all.append(rat_dict['clustMean'])
+                clustNum_all.append(rat_dict['clustNum'])
+                freq_all.append(rat_dict['freq'])
+                total_all.append(rat_dict['total'])
+                
+    return bMean_all, bNum_all, clustMean_all, clustNum_all, freq_all, total_all
+
+
 """
 PrefCalc function
 Calculate the % casein preference based on licks during free choice trials
@@ -268,56 +297,50 @@ Quin 1.0 mM 20/11 and 21/11/2018
 """
 
 ##Casein and Malto total licks (forced & free choice trials) for each preference tests
-Quin0_t1 = ListsMaker('05/11/2018', LLicks, RLicks)
-Quin0_t2 = ListsMaker('06/11/2018', LLicks, RLicks)
-Quin0_03_t1 = ListsMaker('07/11/2018', LLicks, RLicks)
-Quin0_03_t2 = ListsMaker('09/11/2018', LLicks, RLicks)
-Quin0_06_t1 = ListsMaker('12/11/2018', LLicks, RLicks)
-Quin0_06_t2 = ListsMaker('13/11/2018', LLicks, RLicks)
-Quin0_1_t1 = ListsMaker('14/11/2018', LLicks, RLicks)
-Quin0_1_t2 = ListsMaker('15/11/2018', LLicks, RLicks)
-Quin0_5_t1 = ListsMaker('16/11/2018', LLicks, RLicks)
-Quin0_5_t2 = ListsMaker('19/11/2018', LLicks, RLicks)
-Quin1_0_t1 = ListsMaker('20/11/2018', LLicks, RLicks)
-Quin1_0_t2 = ListsMaker('21/11/2018', LLicks, RLicks)
+Quin_all = []
+Quin_all.append(ListsMaker('05/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('06/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('07/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('09/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('12/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('13/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('14/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('15/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('16/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('19/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('20/11/2018', LLicks, RLicks))
+Quin_all.append(ListsMaker('21/11/2018', LLicks, RLicks))
 
 ##Casein and Malto forced licks for each preference tests
-Quin0_t1_forced = ListsMaker('05/11/2018', LLicks_forced, RLicks_forced)
-Quin0_t2_forced = ListsMaker('06/11/2018', LLicks_forced, RLicks_forced)
-Quin0_03_t1_forced = ListsMaker('07/11/2018', LLicks_forced, RLicks_forced)
-Quin0_03_t2_forced = ListsMaker('09/11/2018', LLicks_forced, RLicks_forced)
-Quin0_06_t1_forced = ListsMaker('12/11/2018', LLicks_forced, RLicks_forced)
-Quin0_06_t2_forced = ListsMaker('13/11/2018', LLicks_forced, RLicks_forced)
-Quin0_1_t1_forced = ListsMaker('14/11/2018', LLicks_forced, RLicks_forced)
-Quin0_1_t2_forced = ListsMaker('15/11/2018', LLicks_forced, RLicks_forced)
-Quin0_5_t1_forced = ListsMaker('16/11/2018', LLicks_forced, RLicks_forced)
-Quin0_5_t2_forced = ListsMaker('19/11/2018', LLicks_forced, RLicks_forced)
-Quin1_0_t1_forced = ListsMaker('20/11/2018', LLicks_forced, RLicks_forced)
-Quin1_0_t2_forced = ListsMaker('21/11/2018', LLicks_forced, RLicks_forced)
+Quin_forced = []
+Quin_forced.append(ListsMaker('05/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('06/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('07/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('09/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('12/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('13/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('14/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('15/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('16/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('19/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('20/11/2018', LLicks_forced, RLicks_forced))
+Quin_forced.append(ListsMaker('21/11/2018', LLicks_forced, RLicks_forced))
 
 ##Casein and Malto free licks for each preference tests
-Quin0_t1_free = ListsMaker('05/11/2018', LLicks_free, RLicks_free)
-Quin0_t2_free = ListsMaker('06/11/2018', LLicks_free, RLicks_free)
-Quin0_03_t1_free = ListsMaker('07/11/2018', LLicks_free, RLicks_free)
-Quin0_03_t2_free = ListsMaker('09/11/2018', LLicks_free, RLicks_free)
-Quin0_06_t1_free = ListsMaker('12/11/2018', LLicks_free, RLicks_free)
-Quin0_06_t2_free = ListsMaker('13/11/2018', LLicks_free, RLicks_free)
-Quin0_1_t1_free = ListsMaker('14/11/2018', LLicks_free, RLicks_free)
-Quin0_1_t2_free = ListsMaker('15/11/2018', LLicks_free, RLicks_free)
-Quin0_5_t1_free = ListsMaker('16/11/2018', LLicks_free, RLicks_free)
-Quin0_5_t2_free = ListsMaker('19/11/2018', LLicks_free, RLicks_free)
-Quin1_0_t1_free = ListsMaker('20/11/2018', LLicks_free, RLicks_free)
-Quin1_0_t2_free = ListsMaker('21/11/2018', LLicks_free, RLicks_free)
+Quin_free = []
+Quin_free.append(ListsMaker('05/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('06/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('07/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('09/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('12/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('13/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('14/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('15/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('16/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('19/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('20/11/2018', LLicks_free, RLicks_free))
+Quin_free.append(ListsMaker('21/11/2018', LLicks_free, RLicks_free))
 
-
-##Group licks from forced trials and free trials in different lists
-Quin_forced = [Quin0_t1_forced, Quin0_t2_forced, Quin0_03_t1_forced, Quin0_03_t2_forced,\
-             Quin0_06_t1_forced, Quin0_06_t2_forced, Quin0_1_t1_forced, Quin0_1_t2_forced, \
-             Quin0_5_t1_forced, Quin0_5_t2_forced, Quin1_0_t1_forced, Quin1_0_t2_forced]
-
-Quin_free = [Quin0_t1_free, Quin0_t2_free, Quin0_03_t1_free, Quin0_03_t2_free,\
-             Quin0_06_t1_free, Quin0_06_t2_free, Quin0_1_t1_free, Quin0_1_t2_free, \
-             Quin0_5_t1_free, Quin0_5_t2_free, Quin1_0_t1_free, Quin1_0_t2_free]
 
 
 ##Calculate casein preference for each rat for a each quinine concentration test\
@@ -347,41 +370,8 @@ Micro_licks_forced = Sort_micro(Quin_forced)
 Micro_licks_free = Sort_micro(Quin_free)
 
 #Sort and export final results
+bMean_all_forced, bNum_all_forced, clustMean_all_forced, \
+clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_licks_forced) #Forced trials
 
-
-
-
-###try to calculate preference based on choice for each trial
-##isolate timing of each free choice trial
-##determine casein or maltodextrin licking during each trial as true or false
-##true=1 false=0
-##calculate pref as
-#
-#Free_trials_timing = [] #list of timestamps of each free choice test across quinine days
-#for trials in Trials:
-#    Free_trials_timing.append(trials[45:])
-#Free_trials_end = []
-#for rat in Free_trials_timing:
-#    for trial_start in range(0, len(rat), 30):
-#        trial_end = rat[trial_start:trial_start+30]
-#        Free_trials_end.append(trial_end) 
-#
-#
-#LLicks_casein = []
-#LLicks_malto = []
-#RLicks_casein = []
-#RLicks_malto = []
-##
-#for index, bottle in enumerate(Data['Left']):
-#    if 'Cas' in Data['Left'][index]:
-#        LLicks_casein.append(LLicks[index])
-#    else:
-#        LLicks_malto.append(LLicks[index])
-#        
-#for index, bottle in enumerate(Data['Right']):
-#    if 'Cas' in Data['Right'][index]:
-#        RLicks_casein.append(RLicks[index])
-#    else:
-#        RLicks_malto.append(RLicks[index])
-        
-Cas_Pref_spreadsheet = pd.DataFrame.from_dict(Cas_Pref_NR_quinine, orient='index').transpose()
+bMean_all_free, bNum_all_free, clustMean_all_free, \
+clustNum_all_free, freq_all_free, total_all_free = allratlistmaker(Micro_licks_free) #Free trials

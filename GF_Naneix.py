@@ -167,8 +167,7 @@ def lickCalc(licks, offset = [], burstThreshold = 0.25, clustThreshold = 0.5,
         else:
             lickData['clustMean'] = 0
             
-        lickData['clustILIs'] = [x for x in lickData['ilis'] if x > clustThreshold]
-        
+        lickData['clustILIs'] = [x for x in lickData['ilis'] if x > clustThreshold]        
     
     except:
         lickData['freq'] = 0
