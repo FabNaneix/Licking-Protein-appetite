@@ -168,8 +168,8 @@ def allratlistmaker(licking_patterns):
     freq_all = []
     total_all = []    
 
-    for condition_name in Micro_licks_forced:
-        for quinine_conc in Micro_licks_forced[condition_name]:
+    for condition_name in licking_patterns:
+        for quinine_conc in licking_patterns[condition_name]:
             for rat_dict in quinine_conc:
                 bMean_all.append(rat_dict['bMean'])
                 bNum_all.append(rat_dict['bNum'])
