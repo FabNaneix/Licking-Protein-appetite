@@ -200,8 +200,11 @@ def PrefCalc(Quin_free):
 "-------------------------------------------------------------------------------"
 ## Metadata folder (check pathway for each exp)
 #metafile="C:\\Users\\fabie\\Documents\\QPP data\\QPPh1_metafile.txt" #metafile with all data
-metafile="C:\\Users\\fabie\\Documents\\QPP data\\QPPh1_metafile_pref.txt" #metafile with only preference tests
-medfolder="C:\\Users\\fabie\\Documents\\QPP data\\Behaviour\\"
+metafile="C:\\Users\\katep\\OneDrive\\Desktop\\QPPh1_metafile_pref.txt" #metafile with only preference tests
+medfolder="C:\\Users\\katep\\OneDrive\\Desktop\\QPPh_medfiles\\"
+
+
+
 
 ## Extraction licks ('b' = licks left; 'e'= licks right) from medfile
 Data = Extract(metafile)
@@ -380,12 +383,12 @@ def allratlistmaker(Micro_licks_dict):
  #   return(bMean_all, bNum_all, clustMean_all, clustNum_all, freq_all, total_all)
 
     return count
-
-bMean_all_forced, bNum_all_forced, clustMean_all_forced, \
-clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_licks_forced)
-
-
-
+#
+#bMean_all_forced, bNum_all_forced, clustMean_all_forced, \
+#clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_licks_forced)
+#
+#
+#
 
 
 
