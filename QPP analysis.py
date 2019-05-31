@@ -369,7 +369,8 @@ Cas_Pref_PR_quinine = {'Quin 0': Cas_Pref_PR[0:2], 'Quin 0.03':Cas_Pref_PR[2:4],
 Micro_licks_forced = Sort_micro(Quin_forced)
 Micro_licks_free = Sort_micro(Quin_free)
 
-#Sort and export final results
+#Sort and export final results (1 list for each parameters with 192 values:\
+#0-47: NR-casein; 48-95: NR-malto; 96-143: PR-casein; 144-191: PR-malto)
 bMean_all_forced, bNum_all_forced, clustMean_all_forced, \
 clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_licks_forced) #Forced trials
 
