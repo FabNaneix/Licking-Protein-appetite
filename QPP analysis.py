@@ -295,52 +295,19 @@ Quin 0.1 mM 14/11 and 15/11/2018
 Quin 0.5 mM 16/11 and 19/11/2018
 Quin 1.0 mM 20/11 and 21/11/2018
 """
-
 ##Casein and Malto total licks (forced & free choice trials) for each preference tests
+dates = ['05/11/2018', '06/11/2018', '07/11/2018', '09/11/2018', '12/11/2018', \
+         '13/11/2018', '14/11/2018', '15/11/2018', '16/11/2018', '19/11/2018', \
+         '20/11/2018', '21/11/2018']
+
 Quin_all = []
-Quin_all.append(ListsMaker('05/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('06/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('07/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('09/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('12/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('13/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('14/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('15/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('16/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('19/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('20/11/2018', LLicks, RLicks))
-Quin_all.append(ListsMaker('21/11/2018', LLicks, RLicks))
+Quin_forced = [] #Casein and Malto forced licks for each preference tests
+Quin_free = [] #Casein and Malto free licks for each preference tests
 
-##Casein and Malto forced licks for each preference tests
-Quin_forced = []
-Quin_forced.append(ListsMaker('05/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('06/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('07/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('09/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('12/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('13/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('14/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('15/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('16/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('19/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('20/11/2018', LLicks_forced, RLicks_forced))
-Quin_forced.append(ListsMaker('21/11/2018', LLicks_forced, RLicks_forced))
-
-##Casein and Malto free licks for each preference tests
-Quin_free = []
-Quin_free.append(ListsMaker('05/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('06/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('07/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('09/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('12/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('13/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('14/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('15/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('16/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('19/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('20/11/2018', LLicks_free, RLicks_free))
-Quin_free.append(ListsMaker('21/11/2018', LLicks_free, RLicks_free))
-
+for date in dates:
+       Quin_all.append(ListsMaker(date, LLicks, RLicks))
+       Quin_forced.append(ListsMaker(date, LLicks_forced, RLicks_forced))
+       Quin_free.append(ListsMaker(date, LLicks_free, RLicks_free))
 
 
 ##Calculate casein preference for each rat for a each quinine concentration test\
