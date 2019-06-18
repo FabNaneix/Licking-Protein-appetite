@@ -305,9 +305,9 @@ Quin_forced = [] #Casein and Malto forced licks for each preference tests
 Quin_free = [] #Casein and Malto free licks for each preference tests
 
 for date in dates:
-       Quin_all.append(ListsMaker(date, LLicks, RLicks))
-       Quin_forced.append(ListsMaker(date, LLicks_forced, RLicks_forced))
-       Quin_free.append(ListsMaker(date, LLicks_free, RLicks_free))
+    Quin_all.append(ListsMaker(date, LLicks, RLicks))
+    Quin_forced.append(ListsMaker(date, LLicks_forced, RLicks_forced))
+    Quin_free.append(ListsMaker(date, LLicks_free, RLicks_free))
 
 
 ##Calculate casein preference for each rat for a each quinine concentration test\
@@ -343,3 +343,102 @@ clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_l
 
 bMean_all_free, bNum_all_free, clustMean_all_free, \
 clustNum_all_free, freq_all_free, total_all_free = allratlistmaker(Micro_licks_free) #Free trials
+
+#Initial lick rate on 1st trial
+Quin_all_2 = []
+for session in Quin_all:
+    for group in session:
+        for rat in group:
+            Quin_all_2.append(group)
+
+
+#def initial_lick_rate(lst_licks, trial): #cut licks(left or right) for the selected number of trials
+#    Licks_trial = []  
+#    Licks_trial_time = []
+#    for session in lst_licks:
+#        for group in session:
+#            for index, rat in enumerate(group):
+#                if len(Trials[index])
+#                
+#                
+#                
+#    for index, session in enumerate(lst_licks): 
+#        if len(Trials[index]) > trial:
+#            End = Trials[index][trial]
+#            Temp_licks = []
+#            for lick in session:
+#                if lick < End:
+#                    Temp_licks.append(lick)
+#            Licks_trial_time.append(Temp_licks)
+#    Licks_trial = [len(rat) for rat in Licks_trial_time]
+#    
+#    duration = []
+#    for rat in Licks_trial_time:
+#        try:
+#            d = rat[-1] - rat[0]
+#            duration.append(d)
+#        except:
+#            d = 0
+#            duration.append(d)
+#    
+#    Freq_Licks_trial = []
+#    for rat in range(len(duration)):
+#        try:
+#            freq = Licks_trial[rat] / duration[rat]
+#            Freq_Licks_trial.append(freq)
+#        except:
+#            freq = 0
+#            Freq_Licks_trial.append(freq)
+#            
+#    return Freq_Licks_trial
+#
+#Initial_Freq_all = initial_lick_rate(Quin_all, 1)
+
+
+#def initial_lick_rate(LLicks, RLicks):
+#    Init_Freq_C_NR = []
+#    Init_Freq_M_LicksNR = []
+#    Init_Freq_C_LicksPR = []
+#    Init_Freq_M_LicksPR = []
+#
+#    for index, session     
+#    
+#    
+#def ListsMaker(date, LLicks, RLicks):
+#    PrefT_C_LicksNR = []
+#    PrefT_M_LicksNR = []
+#    PrefT_C_LicksPR = []
+#    PrefT_M_LicksPR = []
+#    for index, session in enumerate(Data['Date']): #index the position in the Date list
+#        if Data['Date'][index] == date: #select the quinine concentration 0 (no quinine)
+#                if 'NR' in Data['Diet'][index]:
+#                    if 'Cas' in Data['Left'][index]:
+#                        PrefT_C_LicksNR.append(LLicks[index])
+#                    if 'Cas' in Data['Right'][index]:
+#                        PrefT_C_LicksNR.append(RLicks[index])
+#                    if 'Malto' in Data['Left'][index]:
+#                        PrefT_M_LicksNR.append(LLicks[index])
+#                    if 'Malto' in Data['Right'][index]:
+#                        PrefT_M_LicksNR.append(RLicks[index])
+#                if 'PR' in Data['Diet'][index]:
+#                   if 'Cas' in Data['Left'][index]:
+#                        PrefT_C_LicksPR.append(LLicks[index])
+#                   if 'Cas' in Data['Right'][index]:
+#                        PrefT_C_LicksPR.append(RLicks[index])
+#                   if 'Malto' in Data['Left'][index]:
+#                        PrefT_M_LicksPR.append(LLicks[index])
+#                   if 'Malto' in Data['Right'][index]:
+#                        PrefT_M_LicksPR.append(RLicks[index])
+#                        
+#    return([PrefT_C_LicksNR, PrefT_M_LicksNR, PrefT_C_LicksPR, PrefT_M_LicksPR])
+
+#LLicks_1st = initial_lick_rate(LLicks, 1)
+#RLicks_1st = initial_lick_rate(RLicks, 1)   
+#
+#Initial_Freq_all = []    
+#for date in dates:
+#    Initial_Freq_all.append(ListsMaker(date, LLicks_1st, RLicks_1st))
+#
+#bottle = []
+#for Medfile in Data['Medfile']:
+#    bottle.append(GF.medfilereader(medfolder+Medfile, varsToExtract = ['r'], remove_var_header = True))
