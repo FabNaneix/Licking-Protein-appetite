@@ -344,12 +344,18 @@ clustNum_all_forced, freq_all_forced, total_all_forced = allratlistmaker(Micro_l
 bMean_all_free, bNum_all_free, clustMean_all_free, \
 clustNum_all_free, freq_all_free, total_all_free = allratlistmaker(Micro_licks_free) #Free trials
 
+
+
+
+
+
+
 #Initial lick rate on 1st trial
-Quin_all_2 = []
-for session in Quin_all:
-    for group in session:
-        for rat in group:
-            Quin_all_2.append(group)
+#Quin_all_2 = []
+#for session in Quin_all:
+#    for group in session:
+#        for rat in group:
+#            Quin_all_2.append(group)
 
 
 #def initial_lick_rate(lst_licks, trial): #cut licks(left or right) for the selected number of trials
