@@ -55,13 +55,13 @@ RLicks: list of Right licks with the same index than 'date'
 Returns for each session ('date') 4 lists of n animals as following:
 NR_casein / NR_malto / PR_casein / NR_malto
 """    
-def ListsMaker(date, LLicks, RLicks):
+def ListsMaker(test, LLicks, RLicks):
     PrefT_C_LicksNR = []
     PrefT_M_LicksNR = []
     PrefT_C_LicksPR = []
     PrefT_M_LicksPR = []
-    for index, session in enumerate(Data['Date']): #index the position in the Date list
-        if Data['Date'][index] == date: #select the quinine concentration 0 (no quinine)
+    for index, session in enumerate(Data['Session']): #index the position in the Date list
+        if Data['Session'][index] == test: 
                 if 'NR' in Data['Diet'][index]:
                     if 'Cas' in Data['Left'][index]:
                         PrefT_C_LicksNR.append(LLicks[index])
@@ -124,30 +124,30 @@ def Sort_micro(Pref_test):
     Micro_PR_m = []
     
     for pref_test in Micro_lst: #for each day of quinine test
-        for condition in pref_test[0:4]:
+        for condition in pref_test[0:9]:
             Micro_NR_c.append(condition)        
-        for condition in pref_test[4:8]:
+        for condition in pref_test[9:18]:
             Micro_NR_m.append(condition)
-        for condition in pref_test[8:12]:
+        for condition in pref_test[18:25]:
             Micro_PR_c.append(condition)
-        for condition in pref_test[12:]:
+        for condition in pref_test[25:]:
             Micro_PR_m.append(condition)
 
     Micro_NR_casein = []
-    for rat in range(0, len(Micro_NR_c), 4):
-        split = Micro_NR_c[rat:rat+4]
+    for rat in range(0, len(Micro_NR_c), 9):
+        split = Micro_NR_c[rat:rat+9]
         Micro_NR_casein.append(split)
     Micro_NR_malto = []
-    for rat in range(0, len(Micro_NR_m), 4):
-        split = Micro_NR_m[rat:rat+4]
+    for rat in range(0, len(Micro_NR_m), 9):
+        split = Micro_NR_m[rat:rat+9]
         Micro_NR_malto.append(split)
     Micro_PR_casein = []
-    for rat in range(0, len(Micro_PR_c), 4):
-        split = Micro_PR_c[rat:rat+4]
+    for rat in range(0, len(Micro_PR_c), 7):
+        split = Micro_PR_c[rat:rat+7]
         Micro_PR_casein.append(split)    
     Micro_PR_malto = []
-    for rat in range(0, len(Micro_PR_m), 4):
-        split = Micro_PR_m[rat:rat+4]
+    for rat in range(0, len(Micro_PR_m), 7):
+        split = Micro_PR_m[rat:rat+7]
         Micro_PR_malto.append(split)
     
 
@@ -230,8 +230,8 @@ def PrefCalc(Pref_free):
 "-------------------------------------------------------------------------------"
 ## Metadata folder (check pathway for each exp)
 #metafile="C:\\Users\\fabie\\Documents\\QPP data\\QPPh1_metafile.txt" #metafile with all data
-metafile="C:\\Users\\fabie\\Documents\\PPP1\\PPP1_metafile_preference.txt" #metafile with only preference tests
-medfolder="C:\\Users\\fabie\\Documents\\PPP1\\"
+metafile="C:\\Users\\fabie\\Documents\\PPP\\PPP_metafile_preference.txt" #metafile with only preference tests
+medfolder="C:\\Users\\fabie\\Documents\\PPP\\"
 
 
 ## Extraction licks ('b' = licks left; 'e'= licks right) from medfile
@@ -287,23 +287,22 @@ for index, session in enumerate(RLicks): #separate forced and free trials on rig
         RLicks_free.append(Temp_licks2)
         
 """
-Date of Preference tests.
-Date in format yymmdd
-Pref 1: 171027
-Pref 2: 171103
-Pref 3: 171110
+Preference tests.
+Pref 1
+Pref 2
+Pref 3
 """
 ##Casein and Malto total licks (forced & free choice trials) for each preference tests
-dates = ['171027', '171103', '171110']
+tests = ['pref1', 'pref2', 'pref3']
 
 Pref_Licks_all = []
 Pref_Licks_forced = [] #Casein and Malto forced licks for each preference tests
 Pref_Licks_free = [] #Casein and Malto free licks for each preference tests
 
-for date in dates:
-    Pref_Licks_all.append(ListsMaker(date, LLicks, RLicks))
-    Pref_Licks_forced.append(ListsMaker(date, LLicks_forced, RLicks_forced))
-    Pref_Licks_free.append(ListsMaker(date, LLicks_free, RLicks_free))
+for test in tests:
+    Pref_Licks_all.append(ListsMaker(test, LLicks, RLicks))
+    Pref_Licks_forced.append(ListsMaker(test, LLicks_forced, RLicks_forced))
+    Pref_Licks_free.append(ListsMaker(test, LLicks_free, RLicks_free))
 
 
 ##Calculate casein preference for each rat for a each preference test\
